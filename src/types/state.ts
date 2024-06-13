@@ -1,4 +1,3 @@
-// src/types/state.ts
 export interface DataState {
   data: any[] // Specify a more specific type if possible
   loading: boolean
