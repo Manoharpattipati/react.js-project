@@ -1,12 +1,22 @@
-import * as React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
-const Home: React.FC = () => {
-  return (
-    <div>
-      <h1>Welcome to My React App</h1>
-      <p>This is the home page of our simple React application.</p>
-    </div>
-  )
+interface HomeProps {
+  counter: number;
 }
 
-export default Home
+const Home: React.FC<HomeProps> = ({ counter }) => {
+  return (
+    <div>
+      <h2>Counter Value: {counter}</h2>
+    </div>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    counter: state.counter,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

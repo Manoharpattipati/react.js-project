@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { RootState } from './types/state';
 // Importing styles
 import './App.css';
+import { inc, dec } from './actions/action.ts'; // Corrected import path
 
 interface DataType {
   id: number;
@@ -18,9 +19,12 @@ interface DataType {
 interface AppProps {
   data: DataType[];
   fetchData: () => void;
+  inc: () => void;
+  dec: () => void;
+  counter: number; // Added this line
 }
 
-function App({ data, fetchData }: AppProps) {
+function App({ data, fetchData, inc, dec, counter }: AppProps) {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -29,6 +33,8 @@ function App({ data, fetchData }: AppProps) {
     <Router>
       <div>
         <img src='./assets/react.svg' alt='React Logo' />
+        <button onClick={inc}>Increase</button>
+        <button onClick={dec}>Decrease</button>
       </div>
       <Routes>
         <Route path='/' element={<Home />} />
@@ -56,6 +62,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = {
   fetchData,
+  inc,
+  dec,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
